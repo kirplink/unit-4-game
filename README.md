@@ -14,3 +14,6 @@ overwatch orange: #FFA000
 
 $("#card").flip();
 
+ $(this).append(`
+            <p class="char-container-label">Health: ${currentChar.health}</p>
+        `).fadeIn(1000);
