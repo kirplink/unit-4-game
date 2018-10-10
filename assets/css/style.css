@@ -22,64 +22,26 @@ body {
     background-attachment: fixed;
     /* background-size: auto; */
     /* min-width:100%; min-height:100%; width:auto; height:auto; */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 header {
-
-}
-
-#img-logo {
-    width: 700px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#player-container {
+    padding: 15px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card {
-    display: inline-block;
+    /* align-content: center; */
+    justify-content: space-around;
+    align-content: center;
     position: relative;
-    width: 325px;
-    height: 325px;
-    /* margin: 24px; */
+    
 }
 
-.char-container-attacker, .char-container-defender, .char-container-unselectable {
-    background-color: #37454ac2;
-    position: relative;
-    display: inline-block;
-    width: 325px;
-    height: 325px;
-    border-radius: 15px;
-    border: 4px solid #FFA000;
-    box-shadow:20px 20px 80px #181e20;
-    margin: 16px;
-}
-
-.char-container-img {
-    /* position: relative; */
-    border-radius: 12px;
-}
-
-.audio {
-    display: none;
-}
-
-.char-container-label {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    -webkit-text-stroke: 1px #37454a;
-    color: #FFA000; 
-}
-
-.char-select-btn {
+button {
     background-color: #FFA000;
     font-family : inherit;
     border: none;
@@ -88,35 +50,209 @@ header {
     padding: 10px 32px;
     text-align: center;
     text-decoration: none;
-    /* display: inline-block; */
     font-size: 25px;
+    box-shadow:5px 5px 20px #181e20;
+    transition-property: transform;
+    transition-duration: .6s;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(.9);
+}
+
+#img-logo {
+    width: 250px;
+    height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* position: fixed; */
+    /* align-self: flex-start; */
+    
+}
+
+.test-class {
     position: absolute;
-    top: 80%;
+    background-color: purple;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, 0);
-    transition: transform .08s;
+    
 }
 
-.char-select-btn:hover {
-    /* transform: scale(1.02) translate(-50%, 0); */
-    /* transform: translate(-50%, 0); */
-    box-shadow:5px 5px 10px #181e20;
+#player-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.char-select-btn:active {
-    transform: scale(0.98) translate(-50%, 0);
+
+
+.char-container-attacker, .char-container-defender, .char-container-unselectable, .char-container-selected {
+    background-color: #37454ac2;
+    position: relative;
+    /* display: inline-block; */
+    width: 250px;
+    height: 250px;
+    border-radius: 15px;
+    border: 4px solid #FFA000;
+    box-shadow:20px 20px 80px #181e20;
+    margin: 16px;
 }
 
-p {
-    text-align: center;
-    margin-top: 40px;
+.char-container-img {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.audio {
+    display: none;
+}
+
+.char-container-health {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    font-size: 30px;
+    transform: translate(-50%, 0);
     -webkit-text-stroke: 1px #37454a;
     color: #FFA000; 
 }
 
-/* @media only screen and (max-width: 980px) { */
-    /* .container { */
-        /* width: 700px; */
-        /* overflow: hidden; */
-    /* } */
-/* } */
+
+
+p {
+    text-align: center;
+    /* margin-top: 40px; */
+    -webkit-text-stroke: 1px #37454a;
+    color: #FFA000; 
+}
+
+.modal {
+    background-color: #37454ac2;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+}
+
+.begin-btn-container {
+    background-image: linear-gradient(to bottom right, #f5f5f5, #37454A);
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    min-height: 80px;
+    /* background-color: purple; */
+    box-shadow:20px 20px 80px #181e20;
+    border-top: 4px solid #FFA000;
+    border-bottom: 4px solid #FFA000;  
+    animation-name: animatetop;
+    animation-duration: 0.4s;  
+    text-align: center;
+    
+}
+
+@keyframes animatetop {
+    from {top: 0; opacity: 0}
+    to {top: 50%; opacity: 1}
+}
+
+
+
+#begin-btn {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    /* transition: transform .08s; */
+}
+
+.play-again-btn {
+    margin: 10px;
+}
+
+
+.display-none {
+    display: none;
+}
+
+.fighter-container, .defender-container {
+    width: 300px;
+    height: 620px;
+    background-color: #37454ac2;
+    position: relative;
+    /* display: inline-block; */
+    /* width: 325px; */
+    /* height: 325px; */
+    border-radius: 15px;
+    border: 4px solid #FFA000;
+    box-shadow:20px 20px 80px #181e20;
+    margin: 16px;
+}
+
+.fighter-container-label {
+    position: absolute;
+    width: 100%;
+    background-color: #FFA000;
+    bottom: 0;
+    text-align: center;
+    color: #37454a; 
+    border-top: 4px solid #37454A;
+    /* border-bottom: 4px solid #37454A; */
+}
+
+
+.fighter-img {
+    height: 620px;
+    width: 300px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.next-opponent, .player-area {
+    max-width: 308px;
+    min-width: 308px;
+    max-height: 625px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 16px;
+}
+
+.logo-health {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    /* height: 700px; */
+    justify-content: space-between;
+    
+}
+
+.health-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    /* align-self: flex-end; */
+}
+
+.health-flex > p {
+    font-size: 40px;
+    margin-bottom: 50px;
+}
+
+.attack-btn-container {
+    text-align: center;
+}
+
+
+

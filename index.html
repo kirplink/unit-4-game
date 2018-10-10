@@ -12,41 +12,89 @@
 </head>
 
 <body>
-    <header>
-        <img src="assets/images/overwatch-logo.png" alt="Game Logo" id="img-logo">
+    <div class="modal display-none" id="start-modal">
+        <div class="begin-btn-container">
+            <button id="begin-btn">Start!</button>
+        </div>
+    </div>
+
+    <div class="modal display-none" id="win-modal">
+        <div class="begin-btn-container">
+            <p class="modal-text">You Win!</p>
+            <button class="play-again-btn">Play Again!</button>
+        </div>
+    </div>
+
+    <div class="modal display-none" id="lose-modal">
+        <div class="begin-btn-container">
+            <p>You Lose!</p>
+            <button class="play-again-btn">Play Again!</button>
+        </div>
+    </div>
+
+
+
+    <header class="class-header">
+        
+        <div class="player-area"></div>
+
+        <div class="logo-health">
+            <img src="assets/images/overwatch-circle-logo.png" alt="Game Logo" id="img-logo">
+
+            <div class="attack-btn-container">
+                    <button id="attack-btn" class="display-none">attack</button>
+            </div>
+            
+            <div class="health display-none">
+                <p>Attacker Health: <span id="attacker-health"></span></p>
+                <p>|</p>
+                <p>defender Health: <span id="defender-health"></span></p>
+            </div>
+        </div>
+
+        <div class="next-opponent"></div>
+
+        
+
     </header>
+
+    <p id="fighter-select"></p>
 
     <div id="player-container">
         <!-- <div class="char-container" id="tracer-container"> -->
-            <!-- <img src="assets/images/tracer-portrait-cropped.png" alt="Tracer" class="char-container-img"> -->
-            <!-- <button class="char-select-btn" id="tracer-btn">Tracer</button> -->
+        <!-- <img src="assets/images/tracer-portrait-cropped.png" alt="Tracer" class="char-container-img"> -->
+        <!-- <button class="char-select-btn" id="tracer-btn">Tracer</button> -->
         <!-- </div> -->
 
         <!-- <div class="char-container" id="mccree-container"> -->
-            <!-- <img src="assets/images/mccree-portrait-cropped.png" alt="McCree" class="char-container-img"> -->
-            <!-- <button class="char-select-btn" id="mccree-btn">McCree</button> -->
+        <!-- <img src="assets/images/mccree-portrait-cropped.png" alt="McCree" class="char-container-img"> -->
+        <!-- <button class="char-select-btn" id="mccree-btn">McCree</button> -->
         <!-- </div> -->
 
         <!-- <div class="char-container" id="junkrat-container"> -->
-            <!-- <img src="assets/images/junkrat-portrait-cropped.png" alt="Junkrat" class="char-container-img"> -->
-            <!-- <button class="char-select-btn" id="junkrat-btn">Junkrat</button> -->
+        <!-- <img src="assets/images/junkrat-portrait-cropped.png" alt="Junkrat" class="char-container-img"> -->
+        <!-- <button class="char-select-btn" id="junkrat-btn">Junkrat</button> -->
         <!-- </div> -->
 
         <!-- <div class="char-container" id="pharah-container"> -->
-            <!-- <img src="assets/images/pharah-portrait-cropped.png" alt="Pharah" class="char-container-img"> -->
-            <!-- <button class="char-select-btn" id="pharah-btn">Pharah</button> -->
+        <!-- <img src="assets/images/pharah-portrait-cropped.png" alt="Pharah" class="char-container-img"> -->
+        <!-- <button class="char-select-btn" id="pharah-btn">Pharah</button> -->
         <!-- </div> -->
 
 
 
-
+        
 
 
     </div>
 
-    <button class="" id="attack-btn">Attack</button>
 
-    <p id="fighter-select">Select your fighter</p>
+
+    <!-- <button class="" id="attack-btn">Attack</button> -->
+
+    <!-- <button class="" id="test-function">Test Function</button> -->
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
