@@ -166,15 +166,9 @@ p {
 
 
 
-#begin-btn {
-    position: absolute;
-    bottom: 20%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    /* transition: transform .08s; */
-}
 
-.play-again-btn {
+
+.play-again-btn, #begin-btn, #next-defender-btn {
     margin: 10px;
 }
 

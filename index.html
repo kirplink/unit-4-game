@@ -14,37 +14,40 @@
 <body>
     <div class="modal display-none" id="start-modal">
         <div class="begin-btn-container">
+            <p class="modal-text">Round: 1</p>
             <button id="begin-btn">Start!</button>
         </div>
     </div>
 
     <div class="modal display-none" id="win-modal">
         <div class="begin-btn-container">
-            <p class="modal-text">You Win!</p>
+            <p class="modal-text"></p>
             <button class="play-again-btn">Play Again!</button>
         </div>
     </div>
 
-    <div class="modal display-none" id="lose-modal">
+    <div class="modal display-none" id="next-defender-modal">
         <div class="begin-btn-container">
-            <p>You Lose!</p>
-            <button class="play-again-btn">Play Again!</button>
+            <p class="modal-text">Choose Next Defender</p>
+            <button id="next-defender-btn">go!</button>
         </div>
     </div>
+
+
 
 
 
     <header class="class-header">
-        
+
         <div class="player-area"></div>
 
         <div class="logo-health">
             <img src="assets/images/overwatch-circle-logo.png" alt="Game Logo" id="img-logo">
 
             <div class="attack-btn-container">
-                    <button id="attack-btn" class="display-none">attack</button>
+                <button id="attack-btn" class="display-none">attack</button>
             </div>
-            
+
             <div class="health display-none">
                 <p>Attacker Health: <span id="attacker-health"></span></p>
                 <p>|</p>
@@ -54,7 +57,7 @@
 
         <div class="next-opponent"></div>
 
-        
+
 
     </header>
 
@@ -83,7 +86,7 @@
 
 
 
-        
+
 
 
     </div>
@@ -93,7 +96,18 @@
     <!-- <button class="" id="attack-btn">Attack</button> -->
 
     <!-- <button class="" id="test-function">Test Function</button> -->
-
+    <audio class="audio" id="punch-attack" controls preload="none">
+        <source src="assets/sounds/punch-attack.mp3" type="audio/mpeg">
+    </audio>
+    <audio class="audio" id="punch-defend" controls preload="none">
+        <source src="assets/sounds/punch-defend.mp3" type="audio/mpeg">
+    </audio>
+    <audio class="audio" id="victory-sound" controls preload="none">
+        <source src="assets/sounds/victory.mp3" type="audio/mpeg">
+    </audio>
+    <audio class="audio" id="defeat-sound" controls preload="none">
+        <source src="assets/sounds/defeat.mp3" type="audio/mpeg">
+    </audio>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

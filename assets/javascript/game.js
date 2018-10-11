@@ -6,9 +6,9 @@ $(document).ready(function () {
         {
             name: "tracer",
             health: 150,
-            attack: 18,
-            baseAttack: 18,
-            counter: 20,
+            attack: 30,
+            baseAttack: 30,
+            counter: 30,
             headshot: "assets/images/tracer-portrait-cropped.png",
             bodyshot: "assets/images/tracer-portrait.png",
             voiceline: "assets/sounds/tracervoice.ogg",
@@ -16,9 +16,9 @@ $(document).ready(function () {
         },
         {
             name: "mccree",
-            health: 150,
-            attack: 18,
-            baseAttack: 18,
+            health: 200,
+            attack: 20,
+            baseAttack: 20,
             counter: 20,
             headshot: "assets/images/mccree-portrait-cropped.png",
             bodyshot: "assets/images/mccree-portrait.png",
@@ -27,10 +27,10 @@ $(document).ready(function () {
         },
         {
             name: "junkrat",
-            health: 150,
-            attack: 18,
-            baseAttack: 18,
-            counter: 20,
+            health: 180,
+            attack: 25,
+            baseAttack: 25,
+            counter: 25,
             headshot: "assets/images/junkrat-portrait-cropped.png",
             bodyshot: "assets/images/junkrat-portrait.png",
             voiceline: "assets/sounds/junkratvoice.ogg",
@@ -38,10 +38,10 @@ $(document).ready(function () {
         },
         {
             name: "pharah",
-            health: 150,
-            attack: 30,
-            baseAttack: 30,
-            counter: 150,
+            health: 220,
+            attack: 15,
+            baseAttack: 15,
+            counter: 15,
             headshot: "assets/images/pharah-portrait-cropped.png",
             bodyshot: "assets/images/pharah-portrait.png",
             voiceline: "assets/sounds/pharahvoice.mp3",
@@ -53,8 +53,11 @@ $(document).ready(function () {
     var defender = {};
     var isAttackerDisplayed = false;
     var opponentsLeft = characters.length - 1;
-
-    
+    var attackAudio = $(`#punch-attack`)[0];
+    var defendAudio = $(`#punch-defend`)[0];
+    var victoryAudio = $(`#victory-sound`)[0];
+    var defeatAudio = $(`#defeat-sound`)[0];
+    var currentRound = 1;
 
 
 
@@ -89,6 +92,7 @@ $(document).ready(function () {
         isAttackerDisplayed = false;
         opponentsLeft = characters.length - 1;
         $('.health').addClass('display-none').removeClass('health-flex');
+        currentRound = 1;
 
         for (let val of characters) {
             val.selected = false
@@ -96,8 +100,9 @@ $(document).ready(function () {
     }
 
     var victory = function() {
-        if (opponentsLeft <= 0) {
-            $('.modal-text').text('You Win!')
+        if ((opponentsLeft <= 0) && (attacker.health > 0)) {
+            victoryAudio.play();
+            $('.modal-text').text('Victory')
             $('#win-modal').removeClass('display-none');
            
         }
@@ -105,7 +110,8 @@ $(document).ready(function () {
 
     var defeat = function() {
         if (attacker.health <= 0) {
-            $('.modal-text').text('You Lose!')
+            defeatAudio.play();
+            $('.modal-text').text('Defeat')
             $('#win-modal').removeClass('display-none');
             
         }
@@ -159,7 +165,9 @@ $(document).ready(function () {
         $(".char-container-defender").remove();
         $("#fighter-select").text('')
 
+        $('.modal-text').text(`Round: ${currentRound}`);
         $('#start-modal').toggleClass("display-none");
+        currentRound++;
 
     });
 
@@ -169,8 +177,23 @@ $(document).ready(function () {
         defender.health -= attacker.attack;
         attacker.attack += attacker.baseAttack;
         attacker.health -= defender.counter;
-        $('#attacker-health').text(attacker.health);
-        $('#defender-health').text(defender.health);
+        
+        attackAudio.play();
+        defendAudio.play();
+        
+        if (attacker.health < 0) {
+            $('#attacker-health').text('0');  
+        } else {
+            $('#attacker-health').text(attacker.health);
+        }
+
+        if (defender.health < 0) {
+            $('#defender-health').text('0');  
+        } else {
+            $('#defender-health').text(defender.health);
+        }
+        
+        ;
 
         if (defender.health <= 0) {
             $('#attack-btn').toggleClass("display-none");
@@ -178,6 +201,8 @@ $(document).ready(function () {
             if (opponentsLeft > 0) {
                 $(".defender-container").fadeOut("slow", function () {
                     // Animation complete.
+                    $('.modal-text').text(`Choose Next Defender`);
+                    $('#next-defender-modal').removeClass('display-none');
                     $('.next-opponent').html('');
     
                     for (let val of characters) {
@@ -226,7 +251,7 @@ $(document).ready(function () {
 
     
 
-    $("#begin-btn").on("click", function () {
+    $(document).on("click", "#begin-btn", function () {
         $('.modal').addClass("display-none");
         if (isAttackerDisplayed === false) {
             $('.player-area').append(`
@@ -251,49 +276,23 @@ $(document).ready(function () {
         $('#attacker-health').text(attacker.health);
         $('#defender-health').text(defender.health);
         $('.health').removeClass('display-none').addClass('health-flex');
-        $('#attack-btn').toggleClass("display-none");
+        $('#attack-btn').removeClass("display-none");
     });
 
 
-
-
-
-
-    $(document).on("click", ".fighter-container", function () {
+    $(document).on("click", '#next-defender-btn', function() {
         
-
-        $(".defender-container").fadeOut("slow", function () {
-            // Animation complete.
-            $('.next-opponent').html('');
-
-            for (let val of characters) {
-                if (val.selected === false) {
-                    var currentValue = JSON.stringify(val);
-                    $('.next-opponent').append(`
-            
-                <div class="char-container-defender hoverable" id=${currentValue}>
-                    <img src="${val.headshot}" alt="${val.name}" class="char-container-img">
-                    <div class="fighter-container-label">
-                        <span>${val.name}</span>
-                    </div> 
-                    <audio class="audio" id="${val.name}-audio" controls preload="none"> 
-                        <source src="${val.voiceline}" type="audio/mpeg">
-                    </audio>
-                </div>
-            
-            `)
-
-                }
-            }
-        });
+        $('#next-defender-modal').addClass('display-none');
+    })
 
 
 
-
-    });
+   
 
 
     gameStart();
+
+    
 
 
 });
